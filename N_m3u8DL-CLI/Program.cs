@@ -212,11 +212,13 @@ namespace N_m3u8DL_CLI.NetCore
                 string keyBase64 = "";
                 string keyIV = "";
                 string baseUrl = "";
+                string urlSuffix = "";
                 Global.STOP_SPEED = o.StopSpeed;
                 Global.MAX_SPEED = o.MaxSpeed;
                 if (!string.IsNullOrEmpty(o.UseKeyBase64)) keyBase64 = o.UseKeyBase64;
                 if (!string.IsNullOrEmpty(o.UseKeyIV)) keyIV = o.UseKeyIV;
                 if (!string.IsNullOrEmpty(o.BaseUrl)) baseUrl = o.BaseUrl;
+                if (!string.IsNullOrEmpty(o.UrlSuffix)) urlSuffix = o.UrlSuffix;
                 if (o.EnableBinaryMerge) DownloadManager.BinaryMerge = true;
                 if (o.DisableDateInfo) FFmpeg.WriteDate = false;
                 if (o.NoProxy) Global.NoProxy = true;
@@ -352,6 +354,8 @@ namespace N_m3u8DL_CLI.NetCore
                 parser.KeyFile = keyFile;
                 if (baseUrl != "")
                     parser.BaseUrl = baseUrl;
+                if (urlSuffix != "")
+                    parser.UrlSuffix = urlSuffix;
                 parser.Headers = reqHeaders;
                 string exePath = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
                 LOGGER.LOGFILE = Path.Combine(exePath, "Logs", DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff") + ".log");

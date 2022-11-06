@@ -288,6 +288,9 @@
   <data name="Help_baseUrl" xml:space="preserve">
     <value>Set Baseurl</value>
   </data>
+  <data name="Help_urlSuffix" xml:space="preserve">
+    <value>Set UrlSuffix</value>
+  </data>
   <data name="Help_headers" xml:space="preserve">
     <value>Set HTTP headers，format: key:value use | split all key&amp;value</value>
   </data>

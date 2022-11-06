@@ -275,6 +275,15 @@ namespace N_m3u8DL_CLI {
                 return ResourceManager.GetString("Help_baseUrl", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 设定UrlSuffix 的本地化字符串。
+        /// </summary>
+        public static string Help_urlSuffix {
+            get {
+                return ResourceManager.GetString("Help_urlSuffix", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 关闭混流中的日期写入 的本地化字符串。

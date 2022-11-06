@@ -22,6 +22,9 @@ namespace N_m3u8DL_CLI
         [Option("baseUrl", HelpText = "Help_baseUrl", ResourceType = typeof(strings))]
         public string BaseUrl { get; set; }
 
+        [Option("urlSuffix", HelpText = "Help_urlSuffix", ResourceType = typeof(strings))]
+        public string UrlSuffix { get; set; }
+
         [Option("headers", HelpText = "Help_headers", ResourceType = typeof(strings))]
         public string Headers { get; set; } = "";
 

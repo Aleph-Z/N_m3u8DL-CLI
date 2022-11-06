@@ -54,6 +54,7 @@ namespace N_m3u8DL_CLI
         private static bool hasAd = false;
 
         public string BaseUrl { get; set; } = string.Empty;
+        public string UrlSuffix { get; set; } = string.Empty;
         public string M3u8Url { get; set; } = string.Empty;
         public string DownDir { get; set; } = string.Empty;
         public string DownName { get; set; } = string.Empty;
@@ -477,7 +478,7 @@ namespace N_m3u8DL_CLI
                     //解析分片的地址
                     else if (expectSegment)
                     {
-                        segUrl = CombineURL(BaseUrl, line);
+                        segUrl = CombineURL(BaseUrl, line, UrlSuffix);
                         if (M3u8Url.Contains("?__gda__"))
                         {
                             segUrl += new Regex("\\?__gda__.*").Match(M3u8Url).Value;
@@ -997,7 +998,47 @@ namespace N_m3u8DL_CLI
 
             return url;
         }
-        
+
+        /// <summary>
+        /// 拼接Baseurl和RelativeUrl
+        /// </summary>
+        /// <param name="baseurl">Baseurl</param>
+        /// <param name="url">RelativeUrl</param>
+        /// <param name="urlsuffix">RelativeUrl</param>
+        /// <returns></returns>
+        public string CombineURL(string baseurl, string url, string urlsuffix)
+        {
+            /*
+            //本地文件形式
+            if (File.Exists(Path.Combine(baseurl, url)))
+            {
+                return Path.Combine(baseurl, url);
+            }*/
+
+
+            Uri uri1 = new Uri(baseurl);  //这里直接传完整的URL即可
+            Uri uri2 = new Uri(uri1, url + urlsuffix);  
+            ForceCanonicalPathAndQuery(uri2);  //兼容XP的低版本.Net
+            url = uri2.ToString();
+
+
+            /*
+            if (!url.StartsWith("http")) 
+            {
+                if (url.StartsWith("/"))
+                {
+                    if (!url.Contains(":"))  // => /livelvy:livelvy/lvy1/WysAABmKyDctEW8V-13959.ts?n=vdn-gdzh-tel-1-6
+                        url = baseurl.Substring(0, baseurl.Length - 1) + url;
+                    else
+                        url = baseurl.Substring(0, baseurl.Length - 1) + url.Substring(url.IndexOf(':'));
+                }
+                else
+                    url = baseurl + url;
+            }*/
+
+            return url;
+        }
+
         /// <summary>
         /// 从url中截取字符串充当baseurl
         /// </summary>
